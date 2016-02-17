@@ -1,0 +1,3 @@
+class Cadooz::GenerationProfileProduct
+
+end

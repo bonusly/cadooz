@@ -1,0 +1,3 @@
+class Cadooz::Order
+
+end
