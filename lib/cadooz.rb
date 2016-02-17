@@ -28,11 +28,17 @@ module Cadooz
   end
 end
 
+require_relative 'cadooz/address'
 require_relative 'cadooz/attributes'
 require_relative 'cadooz/business_order_service'
 require_relative 'cadooz/catalog'
 require_relative 'cadooz/catalog_product'
 require_relative 'cadooz/catalog_product_variation'
 require_relative 'cadooz/generation_profile_product'
+require_relative 'cadooz/greeting_card'
+require_relative 'cadooz/invoice_information'
 require_relative 'cadooz/order'
+require_relative 'cadooz/order_position'
+require_relative 'cadooz/order_status'
+require_relative 'cadooz/payment'
 require_relative 'cadooz/product_category'
