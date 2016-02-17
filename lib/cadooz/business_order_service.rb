@@ -35,6 +35,15 @@ class Cadooz::BusinessOrderService
     deserialize(@call.(__callee__, {customer_reference_number: customer_reference_number}), response_class, __callee__)
   end
 
+  # Returns informations about changes in one of the created order since the lastCheckTime. You should use this task to get changes in orders. Use the lastCheckTime to reduce the data size and the response time for the needed informations. For example: You have created an order on 01.01.2013. In the best situation you will get between 1-3 days later new change states because the order is delivered. If the order returns after a week, you will receive a new change state. Be aware, that you store your "lastCheckTime" on first request and use it next time. All changes since that time are returned.
+  # Returns:
+  # A list of of order result object containing informations about changed orders.
+  def get_changed_orders(last_check_time)
+    response_class = Cadooz::OrderStatus
+
+    deserialize(@call.(__callee__, {last_check_time: last_check_time}), response_class, __callee__)
+  end
+
   # Returns a list of catalog's for the authenticated user. If an error occurs or the user is not allowed to query any catalog, an empty list will be returned.
   # Parameters:
   # includeExtraContent - If true, then some extra content is not included (like attributes and categories)
