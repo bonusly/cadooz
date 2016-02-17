@@ -1,4 +1,5 @@
 require 'json'
+require 'money'
 require 'ostruct'
 require 'pry'
 require 'savon'
