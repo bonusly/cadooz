@@ -24,3 +24,5 @@ module Cadooz
     yield(configuration) if block_given?
   end
 end
+
+require_relative 'cadooz/business_order_service'
