@@ -26,3 +26,7 @@ module Cadooz
 end
 
 require_relative 'cadooz/business_order_service'
+require_relative 'cadooz/catalog'
+require_relative 'cadooz/generation_profile_product'
+require_relative 'cadooz/order'
+require_relative 'cadooz/product_category'
