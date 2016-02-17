@@ -97,6 +97,22 @@ class Cadooz::BusinessOrderService
     deserialize(@call.(__callee__, {generation_profile: generation_profile }), response_class, __callee__)
   end
 
+  # Returns a VoucherInformation Object. The status of the response can be determined using the method VoucherInformation.getResponseState().
+  # If one of the passed arguments is empty the status will be VoucherInformationState.INCORRECT_USAGE.
+  # If passed name of the generation profile is unknown the status will be VoucherInformationState.UNKNOWN_GENERAION_PROFILE.
+  # If passed order number is not existent or does not match the generation profile name or the authenticated user is not allow to query the order informations the status will be VoucherInformationState.ORDER_NOT_FOUND.
+  # Successful queries will have the status VoucherInformationState.SUCCESS.
+  # Parameters:
+  # generationProfileName - The name of the generation profile used to create the order.
+  # orderNumber - The number of the order.
+  # Returns:
+  # A VoucherInformation object. Never null.
+  def get_vouchers_for_order(generation_profile_name = DEFAULT_GENERATION_PROFILE, order_number)
+    response_class = Cadooz::Voucher
+
+    deserialize(@call.(__callee__, {generation_profile_name: generation_profile_name, order_number: order_number }), response_class, __callee__)
+  end
+
   private
 
   def deserialize(response, response_class, operation)
