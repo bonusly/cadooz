@@ -44,6 +44,16 @@ class Cadooz::BusinessOrderService
     deserialize(@call.(__callee__, {last_check_time: last_check_time}), response_class, __callee__)
   end
 
+  # Order getOrder(java.lang.String orderNumber)
+  # Returns all known data about an order identified by the cadooz order number. Be aware that not all information that we received (invoice informations etc) can be returned. Only the "necessary" informations like what is orders are stored on the order number.
+  # Returns:
+  # The order object or null if no order was found.
+  def get_order(order_number)
+    response_class = Cadooz::Order
+
+    deserialize(@call.(__callee__, {order_number: order_number}), response_class, __callee__)
+  end
+
   # Returns a list of catalog's for the authenticated user. If an error occurs or the user is not allowed to query any catalog, an empty list will be returned.
   # Parameters:
   # includeExtraContent - If true, then some extra content is not included (like attributes and categories)
@@ -53,6 +63,18 @@ class Cadooz::BusinessOrderService
     response_class = Cadooz::Catalog
 
     deserialize(@call.(__callee__, {include_extra_content: include_extra_content }), response_class, __callee__)
+  end
+
+  # CatalogProduct getProductInformations(java.lang.String productNumber)
+  # Returns a specific product with all known informations. The method takes care about the available products inside your catalog.
+  # Parameters:
+  # productNumber - can be a cadooz product number (default) or a generation profile product number (@see GenerationProfileProduct).
+  # Returns:
+  # the product with all known informations
+  def get_product_informations(product_number)
+    response_class = Cadooz::CatalogProduct
+
+    deserialize(@call.(__callee__, {product_number: product_number }), response_class, __callee__)
   end
 
   # Returns a List of ProductCategory objects for CatalogProduct objects or an empty list if an error occurs.
