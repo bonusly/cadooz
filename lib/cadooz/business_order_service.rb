@@ -56,11 +56,9 @@ class Cadooz::BusinessOrderService
 
     object = JSON.parse(body.to_json, object_class: OpenStruct)
 
-    binding.pry
-
     if object.class == Array
       object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) }
-    elsif object.class == Hash
+    elsif object.class == OpenStruct
       Object::const_get(response_class.to_s).new(object)
     else
       # TODO handle exception
