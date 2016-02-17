@@ -26,6 +26,15 @@ class Cadooz::BusinessOrderService
     deserialize(@call.(__callee__, {order_number: order_number}), response_class, __callee__)
   end
 
+  # Returns informations about an order based on the customer order reference number given during createOrder(Order) in the field CustomerReferenceNumber.
+  # Returns:
+  # The order result object contains informations about the created order.
+  def get_order_status_by_customer_reference_number(customer_reference_number)
+    response_class = Cadooz::OrderStatus
+
+    deserialize(@call.(__callee__, {customer_reference_number: customer_reference_number}), response_class, __callee__)
+  end
+
   # Returns a list of catalog's for the authenticated user. If an error occurs or the user is not allowed to query any catalog, an empty list will be returned.
   # Parameters:
   # includeExtraContent - If true, then some extra content is not included (like attributes and categories)
@@ -64,6 +73,8 @@ class Cadooz::BusinessOrderService
     body = response.body[key][:return]
 
     object = JSON.parse(body.to_json, object_class: OpenStruct)
+
+    binding.pry
 
     if object.class == Array
       object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) }
