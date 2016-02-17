@@ -1,5 +1,6 @@
 require 'json'
 require 'ostruct'
+require 'pry'
 require 'savon'
 
 module Cadooz
