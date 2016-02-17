@@ -1,3 +1,5 @@
+require 'json'
+require 'ostruct'
 require 'savon'
 
 module Cadooz
