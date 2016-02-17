@@ -17,6 +17,15 @@ class Cadooz::BusinessOrderService
     @call = -> o, m { m ? @client.call(o, message: m) : @client.call(o) }
   end
 
+  # Returns informations about an order.
+  # Returns:
+  # The order result object contains informations about the created order.
+  def get_order_status(order_number)
+    response_class = Cadooz::OrderStatus
+
+    deserialize(@call.(__callee__, {order_number: order_number}), response_class, __callee__)
+  end
+
   # Returns a list of catalog's for the authenticated user. If an error occurs or the user is not allowed to query any catalog, an empty list will be returned.
   # Parameters:
   # includeExtraContent - If true, then some extra content is not included (like attributes and categories)
