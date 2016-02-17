@@ -17,6 +17,15 @@ class Cadooz::BusinessOrderService
     @call = -> o, m { m ? @client.call(o, message: m) : @client.call(o) }
   end
 
+  # Creates an order in the cadooz system based on the information given in Order. You should always create an order with a given customer reference number to avoid multiple orders of on order. The customer reference number should be unique over all your orders you do and you should save it on your site.
+  # Returns:
+  # The order result object contains informations about the created order.
+  def create_order(order)
+    response_class = Cadooz::OrderStatus
+
+    deserialize(@call.(__callee__, {order: order}), response_class, __callee__)
+  end
+
   # Returns informations about an order.
   # Returns:
   # The order result object contains informations about the created order.
@@ -120,8 +129,6 @@ class Cadooz::BusinessOrderService
     body = response.body[key][:return]
 
     object = JSON.parse(body.to_json, object_class: OpenStruct)
-
-    binding.pry
 
     if object.class == Array
       object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) }
