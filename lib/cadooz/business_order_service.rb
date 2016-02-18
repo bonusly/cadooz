@@ -20,6 +20,10 @@ class Cadooz::BusinessOrderService
   # Creates an order in the cadooz system based on the information given in Order. You should always create an order with a given customer reference number to avoid multiple orders of on order. The customer reference number should be unique over all your orders you do and you should save it on your site.
   # Returns:
   # The order result object contains informations about the created order.
+  #
+  ### IMPORTANT ###
+  # The minimum set of information that is needed in the Order object is a unique customer_reference_number, a delivery_address and a product_number.
+  #################
   def create_order(order)
     response_class = Cadooz::OrderStatus
 
