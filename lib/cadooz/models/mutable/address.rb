@@ -1,5 +1,5 @@
 class Cadooz::Address
-  attr_accessor :company, :country, :department, :email, :firstname,
+  attr_accessor :city, :company, :country, :department, :email, :firstname,
                 :lastname, :phone, :salutation, :state, :street,
                 :street_add_on, :zip_code
 
