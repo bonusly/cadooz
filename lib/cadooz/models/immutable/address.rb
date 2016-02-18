@@ -15,6 +15,6 @@ class Cadooz::Address
     @state = open_struct&.state
     @street = open_struct&.street
     @street_add_on = open_struct&.street_add_on
-    @zip_code = open_struct&.zip_code
+    @zip_code = open_struct&.zipcode
   end
 end
