@@ -90,7 +90,7 @@ class Cadooz::BusinessOrderService
     deserialize(@call.(__callee__, {product_number: product_number }), response_class, __callee__)
   end
 
-  # Returns a List of ProductCategory objects for CatalogProduct objects or an empty list if an error occurs.
+  # Returns a List of ProductCategory models for CatalogProduct models or an empty list if an error occurs.
   # Returns:
   # A list of all categories or an empty list.z
   def get_available_categories
