@@ -2,7 +2,7 @@ class Cadooz::BusinessOrderService
   DEFAULT_TIMEOUT = 10
   DEFAULT_GENERATION_PROFILE = 'XML Schnittstelle (Test)'
 
-  def initialize(open_timeout, read_timeout)
+  def initialize(open_timeout = DEFAULT_TIMEOUT, read_timeout = DEFAULT_TIMEOUT)
     @client = Savon.client(
       wsdl: Cadooz.configuration.wsdl,
       basic_auth: [
@@ -10,8 +10,8 @@ class Cadooz::BusinessOrderService
           Cadooz.configuration.password
       ],
       headers: { 'SOAPAction' => '' },
-      open_timeout: open_timeout || DEFAULT_TIMEOUT,
-      read_timeout: read_timeout || DEFAULT_TIMEOUT
+      open_timeout: open_timeout,
+      read_timeout: read_timeout
     )
 
     @call = -> o, m { m ? @client.call(o, message: m) : @client.call(o) }
@@ -26,6 +26,8 @@ class Cadooz::BusinessOrderService
   #################
   def create_order(order)
     response_class = Cadooz::OrderStatus
+
+    binding.pry
 
     deserialize(@call.(__callee__, {order: order}), response_class, __callee__)
   end
@@ -133,8 +135,6 @@ class Cadooz::BusinessOrderService
     body = response.body[key][:return]
 
     object = JSON.parse(body.to_json, object_class: OpenStruct)
-
-    binding.pry
 
     if object.class == Array
       object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) }
