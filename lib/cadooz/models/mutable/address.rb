@@ -3,7 +3,7 @@ class Cadooz::Address
 
   attr_accessor :city, :company, :country, :department, :email, :firstname,
                 :lastname, :phone, :salutation, :state, :street,
-                :street_add_on, :zip_code
+                :street_add_on, :zipcode
 
   def initialize
     @company = nil
@@ -17,6 +17,6 @@ class Cadooz::Address
     @state = nil
     @street = nil
     @street_add_on = nil
-    @zip_code = nil
+    @zipcode = nil
   end
 end

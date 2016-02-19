@@ -1,6 +1,6 @@
 module Mixins
   def serialize
-    class_name = self.class.to_s.gsub('Cadooz::', '').downcase
+    class_name = self.class.to_s.gsub('Cadooz::', '').underscore
     result = { class_name.to_sym => {} }
 
     self.instance_variables.each do |var|
@@ -33,5 +33,15 @@ module Mixins
     klass = klass.name.split('::').last.to_sym
 
     Cadooz.constants.include?(klass)
+  end
+end
+
+class String
+  def underscore
+    self.gsub(/::/, '/').
+        gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+        gsub(/([a-z\d])([A-Z])/,'\1_\2').
+        tr("-", "_").
+        downcase
   end
 end
