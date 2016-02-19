@@ -1,20 +1,24 @@
 module Mixins
-  def serialize
+  def serialize(data_only = false)
     class_name = self.class.to_s.gsub('Cadooz::', '').underscore
-    result = { class_name.to_sym => {} }
+    result = data_only ? {} : { class_name.to_sym => {} }
+
+    hash_assign = ->name, value { data_only ? result[name] = value : result[class_name.to_sym][name] = value }
 
     self.instance_variables.each do |var|
       name = var.to_s.gsub('@', '').to_sym
       value = self.instance_variable_get(var)
 
       if value.class.method_defined? :serialize
-        result[class_name.to_sym][name] = value.serialize unless instance_variables_empty?(value)
+        hash_assign.(name, value.serialize(true)) unless instance_variables_empty?(value)
       elsif value.class == Array
+        arr = []
         value.each do |val|
-          result[class_name.to_sym][name] = val.serialize unless instance_variables_empty?(val)
+          arr << val.serialize(true) unless instance_variables_empty?(val)
         end
+        hash_assign.(name, arr) unless arr.blank?
       elsif !cadooz_class(value.class)
-        result[class_name.to_sym][name] = value unless value.blank?
+        hash_assign.(name, value) unless value.blank?
       end
     end
 
