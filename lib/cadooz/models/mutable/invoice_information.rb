@@ -1,4 +1,6 @@
 class Cadooz::InvoiceInformation
+  include Mixins
+
   attr_accessor :debitor_number, :value
 
   def initialize
