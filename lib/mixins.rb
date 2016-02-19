@@ -9,6 +9,10 @@ module Mixins
 
       if value.class.method_defined? :serialize
         result[class_name.to_sym][name] = value.serialize unless instance_variables_empty?(value)
+      elsif value.class == Array
+        value.each do |val|
+          result[class_name.to_sym][name] = val.serialize unless instance_variables_empty?(val)
+        end
       elsif !cadooz_class(value.class)
         result[class_name.to_sym][name] = value unless value.blank?
       end
