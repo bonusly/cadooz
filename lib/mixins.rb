@@ -8,13 +8,21 @@ module Mixins
       value = self.instance_variable_get(var)
 
       if value.class.method_defined? :serialize
-        result[class_name.to_sym][name] = value.to_hash
+        result[class_name.to_sym][name] = value.serialize unless instance_variables_empty?(value)
       elsif !cadooz_class(value.class)
         result[class_name.to_sym][name] = value unless value.blank?
       end
     end
 
     result
+  end
+
+  def instance_variables_empty?(instance)
+    instance.instance_variables.each do |var|
+      return false unless instance.instance_variable_get(var).blank?
+    end
+
+    true
   end
 
   def cadooz_class(klass)
