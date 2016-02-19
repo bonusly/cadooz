@@ -27,7 +27,7 @@ class Cadooz::BusinessOrderService
   def create_order(order)
     response_class = Cadooz::OrderStatus
 
-    deserialize(@call.(__callee__, {order: order}), response_class, __callee__)
+    deserialize(@call.(__callee__, order), response_class, __callee__)
   end
 
   # Returns informations about an order.
