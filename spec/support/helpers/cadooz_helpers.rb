@@ -23,6 +23,7 @@ module CadoozHelpers
     position.value = 10
 
     order.customer_reference_number = 1
+    order.generation_profile = 'XML Schnittstelle (Test)'
     order.delivery_address = address
     order.order_positions << position
 
