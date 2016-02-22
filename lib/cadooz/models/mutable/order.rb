@@ -14,10 +14,10 @@ class Cadooz::Mutable::Order
     @cost_unit = nil
     @credit_or_number = nil
     @customer_reference_number = nil
-    @delivery_address = Cadooz::Address.new
+    @delivery_address = Cadooz::Mutable::Address.new
     @generation_profile = nil
-    @greeting_card = Cadooz::GreetingCard.new
-    @invoice_address = Cadooz::Address.new
+    @greeting_card = Cadooz::Mutable::GreetingCard.new
+    @invoice_address = Cadooz::Mutable::Address.new
     @invoice_information = [] # Cadooz::InvoiceInformation
     @language = nil
     @order_attributes = nil

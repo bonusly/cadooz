@@ -4,7 +4,7 @@ class Cadooz::Immutable::Voucher
               :product_variation_number, :serial_number, :value
 
   def initialize(open_struct)
-    @address = Cadooz::Address.new(open_struct&.address)
+    @address = Cadooz::Immutable::Address.new(open_struct&.address)
     @code = open_struct&.code
     @currency = open_struct&.currency
     @ecard_link = open_struct&.ecard_link
