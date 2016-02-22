@@ -1,6 +1,6 @@
 module Mixins
   def serialize(data_only = false)
-    class_name = self.class.to_s.gsub('Cadooz::', '').underscore
+    class_name = self.class.to_s.gsub(/Cadooz::[a-z]*::/i, '').underscore
     result = data_only ? {} : { class_name.to_sym => {} }
 
     hash_assign = ->name, value { data_only ? result[name] = value : result[class_name.to_sym][name] = value }
