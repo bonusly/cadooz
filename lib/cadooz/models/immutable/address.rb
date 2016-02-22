@@ -1,4 +1,6 @@
 class Cadooz::Immutable::Address
+  include Mixins
+
   attr_reader :city, :company, :country, :department, :email, :firstname,
               :lastname, :phone, :salutation, :state, :street,
               :street_add_on, :zip_code

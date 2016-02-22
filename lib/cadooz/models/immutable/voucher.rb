@@ -1,4 +1,6 @@
 class Cadooz::Immutable::Voucher
+  include Mixins
+
   attr_reader :address, :code, :ecard_link, :evoucher_link,
               :pin, :product_name, :product_number,
               :product_variation_number, :serial_number, :value

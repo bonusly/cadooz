@@ -1,4 +1,6 @@
 class Cadooz::Immutable::OrderStatus
+  include Mixins
+
   attr_reader :delivery_state, :message, :order_number, :order_state,
               :packet_number, :return_reason, :shipping_provider
 

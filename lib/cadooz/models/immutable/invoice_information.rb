@@ -1,4 +1,6 @@
 class Cadooz::Immutable::InvoiceInformation
+  include Mixins
+
   attr_reader :debitor_number, :value
 
   def initialize(open_struct)

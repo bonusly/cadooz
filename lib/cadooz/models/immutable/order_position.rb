@@ -1,4 +1,6 @@
 class Cadooz::Immutable::OrderPosition
+  include Mixins
+
   attr_reader :amount, :attributes, :cadooz_product_number, :currency,
               :delivery_address, :external_reference_number, :greeting_card,
               :value, :voucher_address, :voucher_address_editable,

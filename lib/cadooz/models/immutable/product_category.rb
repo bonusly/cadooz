@@ -1,4 +1,6 @@
 class Cadooz::Immutable::ProductCategory
+  include Mixins
+
   attr_reader :id, :description, :internal_name, :shop_name
 
   def initialize(open_struct)

@@ -1,4 +1,6 @@
 class Cadooz::Immutable::Payment
+  include Mixins
+
   attr_reader :attributes, :description, :paid, :type, :value, :verified
 
   def initialize(open_struct)

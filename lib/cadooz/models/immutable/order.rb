@@ -1,4 +1,6 @@
 class Cadooz::Immutable::Order
+  include Mixins
+
   attr_reader :client, :commission, :cost_owner, :cost_unit, :credit_or_number,
               :customer_reference_number, :delivery_address, :generation_profile,
               :greeting_card, :invoice_address, :invoice_information, :language,

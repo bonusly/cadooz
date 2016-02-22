@@ -1,4 +1,6 @@
 class Cadooz::Immutable::Attributes
+  include Mixins
+
   attr_reader :attribute, :values
 
   def initialize(open_struct)
