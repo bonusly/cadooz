@@ -25,7 +25,7 @@ class Cadooz::BusinessOrderService
   # The minimum set of information that is needed in the Order object is a unique customer_reference_number, a delivery_address and a product_number.
   #################
   def create_order(order)
-    response_class = Cadooz::OrderStatus
+    response_class = Cadooz::Immutable::OrderStatus
 
     deserialize(@call.(__callee__, order), response_class, __callee__)
   end
@@ -34,7 +34,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # The order result object contains informations about the created order.
   def get_order_status(order_number)
-    response_class = Cadooz::OrderStatus
+    response_class = Cadooz::Immutable::OrderStatus
 
     deserialize(@call.(__callee__, {order_number: order_number}), response_class, __callee__)
   end
@@ -43,7 +43,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # The order result object contains informations about the created order.
   def get_order_status_by_customer_reference_number(customer_reference_number)
-    response_class = Cadooz::OrderStatus
+    response_class = Cadooz::Immutable::OrderStatus
 
     deserialize(@call.(__callee__, {customer_reference_number: customer_reference_number}), response_class, __callee__)
   end
@@ -52,7 +52,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # A list of of order result object containing informations about changed orders.
   def get_changed_orders(last_check_time)
-    response_class = Cadooz::OrderStatus
+    response_class = Cadooz::Immutable::OrderStatus
 
     deserialize(@call.(__callee__, {last_check_time: last_check_time}), response_class, __callee__)
   end
@@ -62,7 +62,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # The order object or null if no order was found.
   def get_order(order_number)
-    response_class = Cadooz::Order
+    response_class = Cadooz::Immutable::Order
 
     deserialize(@call.(__callee__, {order_number: order_number}), response_class, __callee__)
   end
@@ -73,7 +73,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # A list of all available catalog id's for context-principal or an empty List.
   def get_available_catalogs(include_extra_content = false)
-    response_class = Cadooz::Catalog
+    response_class = Cadooz::Immutable::Catalog
 
     deserialize(@call.(__callee__, {include_extra_content: include_extra_content }), response_class, __callee__)
   end
@@ -85,7 +85,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # the product with all known informations
   def get_product_informations(product_number)
-    response_class = Cadooz::CatalogProduct
+    response_class = Cadooz::Immutable::CatalogProduct
 
     deserialize(@call.(__callee__, {product_number: product_number }), response_class, __callee__)
   end
@@ -94,7 +94,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # A list of all categories or an empty list.z
   def get_available_categories
-    response_class = Cadooz::ProductCategory
+    response_class = Cadooz::Immutable::ProductCategory
 
     deserialize(@call.(__callee__, nil), response_class, __callee__)
   end
@@ -105,7 +105,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # A list of generation profile products that can be used for an order inside createOrder(Order)
   def get_available_products(generation_profile = DEFAULT_GENERATION_PROFILE)
-    response_class = Cadooz::GenerationProfileProduct
+    response_class = Cadooz::Immutable::GenerationProfileProduct
 
     deserialize(@call.(__callee__, {generation_profile: generation_profile }), response_class, __callee__)
   end
@@ -121,7 +121,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # A VoucherInformation object. Never null.
   def get_vouchers_for_order(generation_profile_name = DEFAULT_GENERATION_PROFILE, order_number)
-    response_class = Cadooz::Voucher
+    response_class = Cadooz::Immutable::Voucher
 
     deserialize(@call.(__callee__, {generation_profile_name: generation_profile_name, order_number: order_number }), response_class, __callee__)
   end
