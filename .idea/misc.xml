@@ -10,5 +10,8 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/lib/cadooz/models/model.rb" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="rbenv: 2.3.0" project-jdk-type="RUBY_SDK" />
 </project>

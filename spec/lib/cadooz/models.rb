@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Cadooz::Model do
+describe Cadooz do
 
   describe "immutable class attributes" do
     Dir.foreach('/lib/cadooz/models/immutable') do |model|
