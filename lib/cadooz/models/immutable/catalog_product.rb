@@ -1,4 +1,4 @@
-class Cadooz::CatalogProduct
+class Cadooz::Immutable::CatalogProduct
   attr_reader :attributes, :categories, :mobile_shippable, :name, :number, :offline_shippable, :online_shippable, :type, :variations
 
   def initialize(open_struct)
@@ -11,5 +11,7 @@ class Cadooz::CatalogProduct
     @online_shippable = open_struct&.online_shippable
     @type = open_struct&.type
     @variations = open_struct&.variations&.each_with_object([]) { |v, arr| arr << Cadooz::CatalogProductVariation.new(v) }
+
+    self.freeze
   end
 end

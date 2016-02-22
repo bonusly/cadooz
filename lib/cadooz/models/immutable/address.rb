@@ -1,10 +1,11 @@
-class Cadooz::Address
+class Cadooz::Immutable::Address
   attr_reader :city, :company, :country, :department, :email, :firstname,
               :lastname, :phone, :salutation, :state, :street,
               :street_add_on, :zip_code
 
   def initialize(open_struct)
-    @company = open_struct&.company
+    @city = open_struct&.city
+    @company =open_struct&.company
     @country = open_struct&.country
     @department = open_struct&.department
     @email = open_struct&.email
@@ -16,5 +17,7 @@ class Cadooz::Address
     @street = open_struct&.street
     @street_add_on = open_struct&.street_add_on
     @zip_code = open_struct&.zipcode
+
+    self.freeze
   end
 end

@@ -1,4 +1,4 @@
-class Cadooz::Catalog
+class Cadooz::Immutable::Catalog
   attr_reader :id, :name, :description, :products
 
   def initialize(open_struct)
@@ -6,5 +6,7 @@ class Cadooz::Catalog
     @name = open_struct&.name
     @description = open_struct&.description
     @products = open_struct&.products&.each_with_object([]) { |p, arr| arr << Cadooz::CatalogProduct(p) }
+
+    self.freeze
   end
 end

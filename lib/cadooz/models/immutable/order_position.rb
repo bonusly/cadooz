@@ -1,4 +1,4 @@
-class Cadooz::OrderPosition
+class Cadooz::Immutable::OrderPosition
   attr_reader :amount, :attributes, :cadooz_product_number, :currency,
               :delivery_address, :external_reference_number, :greeting_card,
               :value, :voucher_address, :voucher_address_editable,
@@ -16,5 +16,7 @@ class Cadooz::OrderPosition
     @voucher_address = open_struct&.voucher_address
     @voucher_address_editable = open_struct&.voucher_address_editable
     @voucher_address_preset = open_struct&.voucher_address_preset
+
+    self.freeze
   end
 end

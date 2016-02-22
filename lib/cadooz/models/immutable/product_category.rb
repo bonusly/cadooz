@@ -1,4 +1,4 @@
-class Cadooz::ProductCategory
+class Cadooz::Immutable::ProductCategory
   attr_reader :id, :description, :internal_name, :shop_name
 
   def initialize(open_struct)
@@ -9,5 +9,7 @@ class Cadooz::ProductCategory
                             &.map_entries
                             &.elements
                             &.inject({}) { |hash, element| hash.merge(element.key.to_sym => element.value) }
+
+    self.freeze
   end
 end

@@ -1,4 +1,4 @@
-class Cadooz::Order
+class Cadooz::Mutable::Order
   include ::Mixins
 
   attr_accessor :client, :commission, :cost_owner, :cost_unit, :credit_or_number,

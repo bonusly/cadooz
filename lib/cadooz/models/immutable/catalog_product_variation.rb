@@ -1,4 +1,4 @@
-class Cadooz::CatalogProductVariation
+class Cadooz::Immutable::CatalogProductVariation
   attr_reader :currency, :name, :number, :value
 
   def initialize(open_struct)
@@ -6,5 +6,7 @@ class Cadooz::CatalogProductVariation
     @name = open_struct&.name
     @number = open_struct&.number
     @value = Money.new((open_struct&.value.to_f * 100) || 0, @currency || 'USD')
+
+    self.freeze
   end
 end

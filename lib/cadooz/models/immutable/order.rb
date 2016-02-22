@@ -1,4 +1,4 @@
-class Cadooz::Order
+class Cadooz::Immutable::Order
   attr_reader :client, :commission, :cost_owner, :cost_unit, :credit_or_number,
               :customer_reference_number, :delivery_address, :generation_profile,
               :greeting_card, :invoice_address, :invoice_information, :language,
@@ -26,5 +26,7 @@ class Cadooz::Order
     @send_mail = open_struct&.send_mail
     @test = open_struct&.test
     @website = open_struct&.website
+
+    self.freeze
   end
 end

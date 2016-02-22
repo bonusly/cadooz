@@ -27,6 +27,9 @@ module Cadooz
   def self.configure
     yield(configuration) if block_given?
   end
+
+  module Immutable end
+  module Mutable end
 end
 
 require_relative 'mixins'

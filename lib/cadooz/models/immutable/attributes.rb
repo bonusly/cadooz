@@ -1,4 +1,4 @@
-class Cadooz::Attributes
+class Cadooz::Immutable::Attributes
   attr_reader :attribute, :values
 
   def initialize(open_struct)
@@ -7,5 +7,7 @@ class Cadooz::Attributes
                          &.map_entries
                          &.elements
                          &.inject({}) { |hash, element| hash.merge(element.key.to_sym => element.value) }
+
+    self.freeze
   end
 end

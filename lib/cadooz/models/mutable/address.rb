@@ -1,4 +1,4 @@
-class Cadooz::Address
+class Cadooz::Mutable::Address
   include Mixins
 
   attr_accessor :city, :company, :country, :department, :email, :firstname,

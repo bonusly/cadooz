@@ -15,4 +15,16 @@ describe Cadooz::Model do
   let(:payment) { Object.new }
   let(:product_category) { Object.new }
   let(:voucher) { Object.new }
+
+  describe "immutable class attributes" do
+    Dir.foreach('/lib/cadooz/models/immutable') do |model|
+      # mock(Object::const_get('Cadooz::' + model.chomp('.rb').capitalize).new(open_struct))
+    end
+  end
+
+  describe "mutable class attributes" do
+    Dir.foreach('lib/cadooz/models/mutable') do |model|
+
+    end
+  end
 end

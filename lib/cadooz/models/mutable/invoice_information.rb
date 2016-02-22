@@ -1,4 +1,4 @@
-class Cadooz::InvoiceInformation
+class Cadooz::Mutable::InvoiceInformation
   include Mixins
 
   attr_accessor :debitor_number, :value

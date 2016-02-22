@@ -1,4 +1,4 @@
-class Cadooz::Payment
+class Cadooz::Immutable::Payment
   attr_reader :attributes, :description, :paid, :type, :value, :verified
 
   def initialize(open_struct)
@@ -11,5 +11,7 @@ class Cadooz::Payment
     @type = open_struct&.type
     @value = open_struct&.value
     @verified = open_struct&.verified
+
+    self.freeze
   end
 end

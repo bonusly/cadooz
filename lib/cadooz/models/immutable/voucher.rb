@@ -1,4 +1,4 @@
-class Cadooz::Voucher
+class Cadooz::Immutable::Voucher
   attr_reader :address, :code, :ecard_link, :evoucher_link,
               :pin, :product_name, :product_number,
               :product_variation_number, :serial_number, :value
@@ -15,5 +15,7 @@ class Cadooz::Voucher
     @product_variation_number = open_struct&.product_variation_number
     @serial_number = open_struct&.serial_number
     @value = Money.new((open_struct&.value.to_f * 100) || 0, @currency || 'USD')
+
+    self.freeze
   end
 end

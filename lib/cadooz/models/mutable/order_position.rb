@@ -1,4 +1,4 @@
-class Cadooz::OrderPosition
+class Cadooz::Mutable::OrderPosition
   include Mixins
 
   attr_accessor :amount, :attributes, :cadooz_product_number, :currency,

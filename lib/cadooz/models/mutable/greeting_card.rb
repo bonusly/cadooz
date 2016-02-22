@@ -1,4 +1,4 @@
-class Cadooz::GreetingCard
+class Cadooz::Mutable::GreetingCard
   include Mixins
 
   attr_accessor :subject, :text
