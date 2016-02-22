@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Cadooz::BusinessOrderService do
+  include CadoozHelpers
 
   describe "instance methods" do
     context "create order" do
