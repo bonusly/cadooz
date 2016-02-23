@@ -180,16 +180,6 @@ describe Cadooz::BusinessOrderService do
       end
     end
 
-    describe "get product informations" do
-      context "succeeds" do
-
-      end
-
-      context "fails" do
-
-      end
-    end
-
     describe "get available categories" do
 
     end

@@ -78,18 +78,6 @@ class Cadooz::BusinessOrderService
     deserialize(@call.(__callee__, {include_extra_content: include_extra_content }), response_class, __callee__)
   end
 
-  # CatalogProduct getProductInformations(java.lang.String productNumber)
-  # Returns a specific product with all known informations. The method takes care about the available products inside your catalog.
-  # Parameters:
-  # productNumber - can be a cadooz product number (default) or a generation profile product number (@see GenerationProfileProduct).
-  # Returns:
-  # the product with all known informations
-  def get_product_informations(product_number)
-    response_class = Cadooz::Immutable::CatalogProduct
-
-    deserialize(@call.(__callee__, {product_number: product_number }), response_class, __callee__)
-  end
-
   # Returns a List of ProductCategory models for CatalogProduct models or an empty list if an error occurs.
   # Returns:
   # A list of all categories or an empty list.z

@@ -20,6 +20,10 @@ module CadoozHelpers
     },
     get_available_catalogs: {
       success: File.read('./spec/support/getAvailableCatalogs.xml')
+    },
+    get_available_categories: {
+      success: "",
+      fail: ""
     }
   }
 
@@ -44,6 +48,10 @@ module CadoozHelpers
       },
       get_available_catalogs: {
         success: File.read('./spec/support/getAvailableCatalogs.txt')
+      },
+      get_available_categories: {
+        success: "",
+        fail: ""
       }
   }
 
