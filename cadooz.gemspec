@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.authors       = ['Andrew Brown']
   s.email         = ['andrew@bonus.ly']
   s.homepage      = 'http://bonus.ly'
+  s.license       = 'MIT'
   s.summary       = 'Ruby Wrapper for cadooz SOAP API'
   s.description   = 'cadooz is a world leader in incentive marketing and distribution of digital rewards, including gift cards, e-vouchers, etc. This gem wraps cadooz\'s BusinessOrderService SOAP API (http://business.cadooz.com/api/businessorder/v1.5.2/com/cadooz/webservice/businessorder/v152/package-summary.html)'
 
