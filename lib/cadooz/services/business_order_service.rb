@@ -133,7 +133,7 @@ class Cadooz::BusinessOrderService
     body = response.body[key][:return]
 
     if body.blank?
-      object = nil
+      object = OpenStruct.new
     else
       object = JSON.parse(body.to_json, object_class: OpenStruct)
     end
