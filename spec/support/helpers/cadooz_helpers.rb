@@ -22,8 +22,7 @@ module CadoozHelpers
       success: File.read('./spec/support/getAvailableCatalogs.xml')
     },
     get_available_categories: {
-      success: "",
-      fail: ""
+      success: File.read('./spec/support/getAvailableCategories.xml')
     }
   }
 
@@ -50,8 +49,7 @@ module CadoozHelpers
         success: File.read('./spec/support/getAvailableCatalogs.txt')
       },
       get_available_categories: {
-        success: "",
-        fail: ""
+        success: File.read('./spec/support/getAvailableCategories.txt')
       }
   }
 
