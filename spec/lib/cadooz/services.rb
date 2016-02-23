@@ -101,26 +101,34 @@ describe Cadooz::BusinessOrderService do
     end
 
     describe "get changed orders" do
-      let(:raw_response) { get_raw_response(:get_changed_orders, true) }
-      let(:response) { get_serialized_response_object(:get_changed_orders, true) }
-
       context "succeeds" do
+        let(:raw_response) { get_raw_response(:get_changed_orders, true) }
+        let(:response) { get_serialized_response_object(:get_changed_orders, true) }
+
         it "should get changed orders" do
           # Past time
           message = { last_check_time: Date.parse('20-02-2016') }
 
           savon.expects(:get_changed_orders).with(message: message).returns(raw_response)
-          expect(service.get_changed_orders(Date.parse('20-02-2016')).serialize).to eq(response)
+          expect(service.get_changed_orders(Date.parse('20-02-2016')).map(&:serialize)).to eq(response)
         end
       end
 
       context "fails" do
+        let(:raw_response) { get_raw_response(:get_changed_orders, false) }
+        let(:response) { get_serialized_response_object(:get_changed_orders, false) }
+
         it "should return an empty response" do
           # Future time
           message = { last_check_time: Date.parse('01-03-2016') }
 
-          savon.expect(:get_changed_orders).with(message: message).returns(raw_response)
+          savon.expects(:get_changed_orders).with(message: message).returns(raw_response)
+          expect(service.get_changed_orders(Date.parse('01-03-2016')).serialize).to eq(response)
         end
+      end
+
+      context "invalid" do
+
       end
     end
 

@@ -29,7 +29,7 @@ module CadoozHelpers
       },
       get_changed_orders: {
         success: "\x04\b[\fo:#Cadooz::Immutable::OrderStatus\f:\x14@delivery_stateI\"\fWAITING\x06:\x06ET:\r@message0:\x12@order_numberI\"\x12160223-066085\x06;\aT:\x11@order_stateI\"\fWAITING\x06;\aT:\x13@packet_number0:\x13@return_reason0:\x17@shipping_provider0o;\x00\f;\x06I\"\fWAITING\x06;\aT;\b0;\tI\"\x12160223-064813\x06;\aT;\nI\"\fWAITING\x06;\aT;\v0;\f0;\r0o;\x00\f;\x06I\"\fWAITING\x06;\aT;\b0;\tI\"\x12160223-066122\x06;\aT;\nI\"\fWAITING\x06;\aT;\v0;\f0;\r0o;\x00\f;\x06I\"\fWAITING\x06;\aT;\b0;\tI\"\x12160223-064653\x06;\aT;\nI\"\fWAITING\x06;\aT;\v0;\f0;\r0o;\x00\f;\x06I\"\fWAITING\x06;\aT;\b0;\tI\"\x12160223-065702\x06;\aT;\nI\"\fWAITING\x06;\aT;\v0;\f0;\r0o;\x00\f;\x06I\"\fWAITING\x06;\aT;\b0;\tI\"\x12160223-064885\x06;\aT;\nI\"\fWAITING\x06;\aT;\v0;\f0;\r0o;\x00\f;\x06I\"\fWAITING\x06;\aT;\b0;\tI\"\x12160223-065853\x06;\aT;\nI\"\fWAITING\x06;\aT;\v0;\f0;\r0",
-        fail: ""
+        fail: "\x04\bo:#Cadooz::Immutable::OrderStatus\f:\x14@delivery_state0:\r@message0:\x12@order_number0:\x11@order_state0:\x13@packet_number0:\x13@return_reason0:\x17@shipping_provider0"
       }
   }
 
@@ -71,6 +71,6 @@ module CadoozHelpers
   def get_serialized_response_object(operation, success)
     raw = Marshal.load(DUMPED_RESPONSE_OBJECTS[operation][success ? :success : :fail])
 
-    raw.serialize
+    raw.class == Array ? raw.map(&:serialize) : raw.serialize
   end
 end
