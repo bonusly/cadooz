@@ -5,8 +5,11 @@ module CadoozHelpers
       fail: "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:CreateOrderResponse xmlns:ns2=\"webservices.cadooz.com\"><return><orderNumber>160223-066122</orderNumber><orderState>ALREADY_PROCESSED</orderState><deliveryState>UNKNOWN</deliveryState><returnReason xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><message>Fehler:  order with external reference number 20000 was already processed! (Ordern Number(s): 160223-066122)</message><packetnumber xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><shippingProvider xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/></return></ns2:CreateOrderResponse></soap:Body></soap:Envelope>"
     },
     get_order_status: {
-
+      success: "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:getOrderStatusResponse xmlns:ns2=\"webservices.cadooz.com\"><return><orderState>DELIVERED</orderState><deliveryState>DELIVERED</deliveryState><returnReason xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><message xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><packetnumber xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><shippingProvider xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/></return></ns2:getOrderStatusResponse></soap:Body></soap:Envelope>",
     },
+    get_order_status_by_customer_reference_number: {
+      success: "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:getOrderStatusByCustomerReferenceNumberResponse xmlns:ns2=\"webservices.cadooz.com\"><return><orderState>DELIVERED</orderState><deliveryState>DELIVERED</deliveryState><returnReason xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><message xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><packetnumber xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><shippingProvider xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/></return></ns2:getOrderStatusByCustomerReferenceNumberResponse></soap:Body></soap:Envelope>",
+    }
   }
 
   DUMPED_RESPONSE_OBJECTS = {
@@ -15,7 +18,10 @@ module CadoozHelpers
         fail: "\x04\bo:#Cadooz::Immutable::OrderStatus\f:\x14@delivery_stateI\"\fUNKNOWN\x06:\x06ET:\r@messageI\"qFehler:  order with external reference number 20000 was already processed! (Ordern Number(s): 160223-066122)\x06;\aT:\x12@order_numberI\"\x12160223-066122\x06;\aT:\x11@order_stateI\"\x16ALREADY_PROCESSED\x06;\aT:\x13@packet_number0:\x13@return_reason0:\x17@shipping_provider0"
       },
       get_order_status: {
-
+        success: "\x04\bo:#Cadooz::Immutable::OrderStatus\f:\x14@delivery_stateI\"\x0EDELIVERED\x06:\x06ET:\r@message0:\x12@order_number0:\x11@order_stateI\"\x0EDELIVERED\x06;\aT:\x13@packet_number0:\x13@return_reason0:\x17@shipping_provider0",
+      },
+      get_order_status_by_customer_reference_number: {
+        success: "\x04\bo:#Cadooz::Immutable::OrderStatus\f:\x14@delivery_stateI\"\x0EDELIVERED\x06:\x06ET:\r@message0:\x12@order_number0:\x11@order_stateI\"\x0EDELIVERED\x06;\aT:\x13@packet_number0:\x13@return_reason0:\x17@shipping_provider0"
       }
   }
 
