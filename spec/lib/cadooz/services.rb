@@ -204,19 +204,36 @@ describe Cadooz::BusinessOrderService do
         let(:response) { get_serialized_response_object(:get_available_products, true) }
 
         it "should get available products" do
+          message = { generation_profile: 'XML Schnittstelle (Test)' }
 
+          savon.expects(:get_available_products).with(message: message).returns(raw_response)
+          expect(service.get_available_products.map(&:serialize)).to eq(response)
         end
       end
 
       context "invalid" do
         it "should raise an exception" do
-
+          # Revisit with VCR recording of failed request
         end
       end
     end
 
     describe "get vouchers for order" do
+      context "succeeds" do
+        let(:raw_response) { get_raw_response(:get_vouchers_for_order, true) }
+        let(:response) { get_serialized_response_object(:get_vouchers_for_order, true) }
 
+        it "should get vouchers for an order number" do
+          message = { generation_profile_name: 'XML Schnittstelle (Test)', order_number: '160223-066085' }
+
+          savon.expects(:get_vouchers_for_order).with(message: message).returns(raw_response)
+          expect(service.get_vouchers_for_order('160223-066085').serialize).to eq(response)
+        end
+      end
+
+      context "invalid" do
+        # Revisit with VCR recording of failed request
+      end
     end
   end
 end

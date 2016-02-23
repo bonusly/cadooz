@@ -23,6 +23,12 @@ module CadoozHelpers
     },
     get_available_categories: {
       success: File.read('./spec/support/getAvailableCategories.xml')
+    },
+    get_available_products: {
+      success: "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:getAvailableProductsResponse xmlns:ns2=\"webservices.cadooz.com\"><return><cadoozProductNumber>8099</cadoozProductNumber><externalProductNumber>BC</externalProductNumber><value xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><customValue>true</customValue></return><return><cadoozProductNumber>8099</cadoozProductNumber><externalProductNumber>8099</externalProductNumber><value xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/><customValue>true</customValue></return></ns2:getAvailableProductsResponse></soap:Body></soap:Envelope>"
+    },
+    get_vouchers_for_order: {
+      success: "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:getVouchersForOrderResponse xmlns:ns2=\"webservices.cadooz.com\"><return><responseState>SUCCESS</responseState></return></ns2:getVouchersForOrderResponse></soap:Body></soap:Envelope>"
     }
   }
 
@@ -50,6 +56,12 @@ module CadoozHelpers
       },
       get_available_categories: {
         success: File.read('./spec/support/getAvailableCategories.txt')
+      },
+      get_available_products: {
+        success: "\x04\b[\ao:0Cadooz::Immutable::GenerationProfileProduct\t:\e@cadooz_product_numberI\"\t8099\x06:\x06ET:\x12@custom_valueT:\x1D@external_product_numberI\"\aBC\x06;\aT:\v@value0o;\x00\t;\x06I\"\t8099\x06;\aT;\bT;\tI\"\t8099\x06;\aT;\n0"
+      },
+      get_vouchers_for_order: {
+        success: "\x04\bo:\x1FCadooz::Immutable::Voucher\x10:\r@addresso:\x1FCadooz::Immutable::Address\x12:\n@city0:\r@company0:\r@country0:\x10@department0:\v@email0:\x0F@firstname0:\x0E@lastname0:\v@phone0:\x10@salutation0:\v@state0:\f@street0:\x13@street_add_on0:\x0E@zip_code0:\n@code0:\x0E@currency0:\x10@ecard_link0:\x13@evoucher_link0:\t@pin0:\x12@product_name0:\x14@product_number0:\x1E@product_variation_number0:\x13@serial_number0:\v@valueo:\nMoney\b:\x10@fractionalu:\x0FBigDecimal\v18:0.0;\x16o:\x14Money::Currency\x14:\b@id:\busd:\x17@alternate_symbols[\x06I\"\bUS$\x06:\x06ET:\x12@decimal_markI\"\x06.\x06;&T:\x19@disambiguate_symbol0:\x11@html_entityI\"\x06$\x06;&T:\x0E@iso_codeI\"\bUSD\x06;&T:\x11@iso_numericI\"\b840\x06;&T:\n@nameI\"\x19United States Dollar\x06;&T:\x0E@priorityi\x06:\e@smallest_denominationi\x06:\r@subunitI\"\tCent\x06;&T:\x15@subunit_to_unitii:\f@symbolI\"\x06$\x06;&T:\x12@symbol_firstT:\x19@thousands_separatorI\"\x06,\x06;&T:\n@bankU:\"Money::Bank::VariableExchange[\a[\bc\x1EMoney::RatesStore::Memory{\x00{\x000"
       }
   }
 
