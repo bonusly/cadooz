@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe Cadooz do
-
-  RSpec::Matchers.define :mutable_block do
-    match do |actual|
-      actual.is_a? Proc
-      actual.call == 'test'
-    end
-
-    def supports_block_expectations?
-      true
-    end
+RSpec::Matchers.define :mutable_block do
+  match do |actual|
+    actual.is_a? Proc
+    actual.call == 'test'
   end
+
+  def supports_block_expectations?
+    true
+  end
+end
+
+describe Cadooz do
 
   describe "immutable class attributes" do
     Dir.foreach('./lib/cadooz/models/immutable') do |model|

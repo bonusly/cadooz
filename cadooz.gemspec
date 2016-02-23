@@ -15,4 +15,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'savon', '~> 2.11.0'
   s.add_development_dependency 'rspec', '~> 3.4.0'
+  s.add_development_dependency 'webmock', '~> 1.24.0'
 end

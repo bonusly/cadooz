@@ -1,4 +1,6 @@
 require 'cadooz'
+require 'savon/mock/spec_helper'
+require 'webmock/rspec'
 
 Dir["./spec/support/*/*.rb"].each { |f| require f }
 

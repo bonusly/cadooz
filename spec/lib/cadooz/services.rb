@@ -1,34 +1,36 @@
 require 'spec_helper'
 
 describe Cadooz::BusinessOrderService do
-  include CadoozHelpers
+  include CadoozHelpers, Savon::SpecHelper
 
-  let(:order) { create_order_param }
+  before(:all) { savon.mock! }
+  after(:all) { savon.unmock! }
+
+  before(:each) do
+    wsdl = File.read('./spec/support/BusinessOrderService.wsdl')
+    stub_request(:get, /wsdl/).to_return(:status => 200, :body => wsdl)
+  end
 
   describe "instance methods" do
-    describe "create order" do
-      context "succeeds" do
-        let(:response) { sample_create_order_response(true) }
+    let(:service) { Cadooz::BusinessOrderService.new }
 
-        before do
-          double(Cadooz::BusinessOrderService).create_order(order) { response }
-        end
+    describe "create order" do
+      let(:order) { create_order_param }
+
+      context "succeeds" do
+        let(:raw_response) { get_raw_response(:create_order, true) }
+        let(:response) { get_serialized_response_object(:create_order, true) }
 
         it "should create the order" do
-          double(Cadooz::Immutable::Order).new(response) { true }
+          message = order.serialize
+
+          savon.expects(:create_order).with(message: message).returns(raw_response)
+
+          expect(service.create_order(order).serialize).to eq(response)
         end
       end
 
       context "fails" do
-        let(:response) { sample_create_order_response(false) }
-
-        before do
-          double(Cadooz::BusinessOrderService).create_order(order) { response }
-        end
-
-        # it "should throw an exception"
-        #   # TODO
-        # end
       end
     end
 

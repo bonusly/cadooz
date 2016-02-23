@@ -7,13 +7,17 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.4.0)
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
     builder (3.0.4)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     gyoku (1.3.1)
       builder (>= 2.1.2)
+    hashdiff (0.3.0)
     httpi (2.4.1)
       rack
     mini_portile2 (2.0.0)
@@ -34,6 +38,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    safe_yaml (1.0.4)
     savon (2.11.1)
       akami (~> 1.2)
       builder (>= 2.1.2)
@@ -45,6 +50,10 @@ GEM
     wasabi (3.5.0)
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
+    webmock (1.24.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
@@ -52,6 +61,7 @@ PLATFORMS
 DEPENDENCIES
   cadooz!
   rspec (~> 3.4.0)
+  webmock (~> 1.24.0)
 
 BUNDLED WITH
    1.11.2

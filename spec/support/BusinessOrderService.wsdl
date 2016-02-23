@@ -1,0 +1,814 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="webservices.cadooz.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="BusinessOrderService" targetNamespace="webservices.cadooz.com">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="webservices.cadooz.com" elementFormDefault="unqualified" targetNamespace="webservices.cadooz.com" version="1.0">
+<xs:element name="Address" type="tns:BusinessOrderAddress"/>
+<xs:element name="Attribute" type="tns:BusinessOrderAttribute"/>
+<xs:element name="Attributes" type="tns:Attributes"/>
+<xs:element name="Campaign" type="tns:Campaign"/>
+<xs:element name="CampaignItem" type="tns:CampaignItem"/>
+<xs:element name="Catalog" type="tns:Catalog"/>
+<xs:element name="CatalogProduct" type="tns:CatalogProduct"/>
+<xs:element name="CatalogProductVariation" type="tns:CatalogProductVariation"/>
+<xs:element name="CreateOrder" type="tns:CreateOrder"/>
+<xs:element name="CreateOrderResponse" type="tns:CreateOrderResponse"/>
+<xs:element name="GenerationProfileProduct" type="tns:GenerationProfileProduct"/>
+<xs:element name="GreetingCard" type="tns:GreetingCard"/>
+<xs:element name="InvoiceInformation" type="tns:InvoiceInformation"/>
+<xs:element name="Map" type="tns:Map"/>
+<xs:element name="MapElement" type="tns:MapElement"/>
+<xs:element name="Order" type="tns:BusinessOrder"/>
+<xs:element name="OrderPosition" type="tns:BusinessOrderPosition"/>
+<xs:element name="OrderStatus" type="tns:BusinessOrderStatus"/>
+<xs:element name="Payment" type="tns:BusinessOrderPayment"/>
+<xs:element name="ProductCategory" type="tns:ProductCategory"/>
+<xs:element name="QueueStatus" type="tns:QueueStatus"/>
+<xs:element name="Voucher" type="tns:Voucher"/>
+<xs:element name="VoucherInformation" type="tns:VoucherInformation"/>
+<xs:element name="getAvailableCatalogs" type="tns:getAvailableCatalogs"/>
+<xs:element name="getAvailableCatalogsResponse" type="tns:getAvailableCatalogsResponse"/>
+<xs:element name="getAvailableCategories" type="tns:getAvailableCategories"/>
+<xs:element name="getAvailableCategoriesResponse" type="tns:getAvailableCategoriesResponse"/>
+<xs:element name="getAvailableProducts" type="tns:getAvailableProducts"/>
+<xs:element name="getAvailableProductsResponse" type="tns:getAvailableProductsResponse"/>
+<xs:element name="getCampaigns" type="tns:getCampaigns"/>
+<xs:element name="getCampaignsResponse" type="tns:getCampaignsResponse"/>
+<xs:element name="getChangedOrders" type="tns:getChangedOrders"/>
+<xs:element name="getChangedOrdersResponse" type="tns:getChangedOrdersResponse"/>
+<xs:element name="getOrder" type="tns:getOrder"/>
+<xs:element name="getOrderResponse" type="tns:getOrderResponse"/>
+<xs:element name="getOrderStatus" type="tns:getOrderStatus"/>
+<xs:element name="getOrderStatusByCustomerReferenceNumber" type="tns:getOrderStatusByCustomerReferenceNumber"/>
+<xs:element name="getOrderStatusByCustomerReferenceNumberResponse" type="tns:getOrderStatusByCustomerReferenceNumberResponse"/>
+<xs:element name="getOrderStatusResponse" type="tns:getOrderStatusResponse"/>
+<xs:element name="getProduct" type="tns:getProduct"/>
+<xs:element name="getProductResponse" type="tns:getProductResponse"/>
+<xs:element name="getQueueStatus" type="tns:getQueueStatus"/>
+<xs:element name="getQueueStatusResponse" type="tns:getQueueStatusResponse"/>
+<xs:element name="getVouchersForOrder" type="tns:getVouchersForOrder"/>
+<xs:element name="getVouchersForOrderResponse" type="tns:getVouchersForOrderResponse"/>
+<xs:element name="processQueueEntry" type="tns:processQueueEntry"/>
+<xs:element name="processQueueEntryResponse" type="tns:processQueueEntryResponse"/>
+<xs:element name="resendOrder" type="tns:resendOrder"/>
+<xs:element name="resendOrderResponse" type="tns:resendOrderResponse"/>
+<xs:complexType name="getProduct">
+<xs:sequence>
+<xs:element minOccurs="0" name="productNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProductResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:CatalogProduct"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CatalogProduct">
+<xs:sequence>
+<xs:element name="number" type="xs:string"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element maxOccurs="unbounded" name="variations" type="tns:CatalogProductVariation"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="attributes" nillable="true" type="tns:Attributes"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="categories" nillable="true" type="tns:ProductCategory"/>
+<xs:element name="type" type="tns:CatalogProductType"/>
+<xs:element name="onlineShippable" type="xs:boolean"/>
+<xs:element name="offlineShippable" type="xs:boolean"/>
+<xs:element name="mobileShippable" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CatalogProductVariation">
+<xs:sequence>
+<xs:element name="number" type="xs:string"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element name="value" type="xs:decimal"/>
+<xs:element name="currency" type="tns:BusinessOrderCurrency"/>
+<xs:element minOccurs="0" name="availability" nillable="true" type="tns:ProductVariationAvailability"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Attributes">
+<xs:sequence>
+<xs:element name="attribute" type="tns:CatalogProductAttribute"/>
+<xs:element name="values" type="tns:Map"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Map">
+<xs:sequence>
+<xs:element minOccurs="0" name="map-entries">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="elements" type="tns:MapElement"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="MapElement">
+<xs:sequence>
+<xs:element name="key" type="xs:string"/>
+<xs:element name="value" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ProductCategory">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="internalName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="shopName" nillable="true" type="tns:Map"/>
+<xs:element minOccurs="0" name="description" nillable="true" type="tns:Map"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="processQueueEntry">
+<xs:sequence>
+<xs:element minOccurs="0" name="userName" type="xs:string"/>
+<xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="processQueueEntryResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BusinessOrderStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BusinessOrderStatus">
+<xs:sequence>
+<xs:element name="orderNumber" type="xs:string"/>
+<xs:element name="orderState" type="tns:BusinessOrderState"/>
+<xs:element name="deliveryState" type="tns:BusinessOrderDeliveryState"/>
+<xs:element minOccurs="0" name="returnReason" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="packetnumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="shippingProvider" nillable="true" type="tns:ShippingProvider"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableCatalogs">
+<xs:sequence>
+<xs:element name="includeExtraContent" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableCatalogsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:Catalog"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Catalog">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+<xs:element maxOccurs="unbounded" name="products" type="tns:CatalogProduct"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getChangedOrders">
+<xs:sequence>
+<xs:element minOccurs="0" name="lastCheckTime" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getChangedOrdersResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:BusinessOrderStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableCategories">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getAvailableCategoriesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ProductCategory"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getOrder">
+<xs:sequence>
+<xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getOrderResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BusinessOrder"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BusinessOrder">
+<xs:sequence>
+<xs:element name="test" type="xs:boolean"/>
+<xs:element name="generationProfile" type="xs:string"/>
+<xs:element name="sendMail" type="xs:boolean"/>
+<xs:element name="commission" nillable="true" type="xs:boolean"/>
+<xs:element minOccurs="0" name="client" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="website" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="costUnit" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="costOwner" nillable="true" type="xs:string"/>
+<xs:element name="language" type="tns:BusinessOrderLanguage"/>
+<xs:element minOccurs="0" name="creditorNumber" nillable="true" type="xs:string"/>
+<xs:element name="customerReferenceNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="orderDescription" nillable="true" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="invoiceInformations" nillable="true" type="tns:InvoiceInformation"/>
+<xs:element name="deliveryAddress" type="tns:BusinessOrderAddress"/>
+<xs:element minOccurs="0" name="invoiceAddress" nillable="true" type="tns:BusinessOrderAddress"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="paymentInformations" nillable="true" type="tns:BusinessOrderPayment"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="orderAttributes" nillable="true" type="tns:BusinessOrderAttribute"/>
+<xs:element maxOccurs="unbounded" name="orderPositions" type="tns:BusinessOrderPosition"/>
+<xs:element minOccurs="0" name="greetingCard" nillable="true" type="tns:GreetingCard"/>
+<xs:element default="false" name="queue" nillable="true" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="InvoiceInformation">
+<xs:sequence>
+<xs:element name="debitorNumber" type="xs:string"/>
+<xs:element name="value" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BusinessOrderAddress">
+<xs:sequence>
+<xs:element name="salutation" type="tns:BusinessOrderSalutation"/>
+<xs:element name="firstname" type="xs:string"/>
+<xs:element name="lastname" type="xs:string"/>
+<xs:element name="company" type="xs:string"/>
+<xs:element name="department" nillable="true" type="xs:string"/>
+<xs:element name="street" type="xs:string"/>
+<xs:element minOccurs="0" name="streetAddon" nillable="true" type="xs:string"/>
+<xs:element name="city" type="xs:string"/>
+<xs:element name="zipcode" type="xs:string"/>
+<xs:element minOccurs="0" name="state" nillable="true" type="xs:string"/>
+<xs:element name="country" type="xs:string"/>
+<xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="phone" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BusinessOrderPayment">
+<xs:sequence>
+<xs:element name="type" type="tns:BusinessOrderPaymentType"/>
+<xs:element name="verified" type="xs:boolean"/>
+<xs:element name="paid" type="xs:boolean"/>
+<xs:element name="value" type="xs:string"/>
+<xs:element name="description" type="xs:string"/>
+<xs:element minOccurs="0" name="attributes" nillable="true" type="tns:Map"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BusinessOrderAttribute">
+<xs:sequence>
+<xs:element name="key" type="xs:string"/>
+<xs:element name="value" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BusinessOrderPosition">
+<xs:sequence>
+<xs:element name="amount" type="xs:int"/>
+<xs:element name="cadoozProductNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="externalReferenceNumber" nillable="true" type="xs:string"/>
+<xs:element name="value" type="xs:string"/>
+<xs:element name="currency" type="tns:BusinessOrderCurrency"/>
+<xs:element minOccurs="0" name="deliveryAddress" nillable="true" type="tns:BusinessOrderAddress"/>
+<xs:element minOccurs="0" name="voucherAddress" nillable="true" type="tns:BusinessOrderAddress"/>
+<xs:element name="voucherAddressEditable" type="xs:boolean"/>
+<xs:element name="voucherAddressPreset" type="xs:boolean"/>
+<xs:element minOccurs="0" name="greetingCard" nillable="true" type="tns:GreetingCard"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="attributes" nillable="true" type="tns:BusinessOrderAttribute"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GreetingCard">
+<xs:sequence>
+<xs:element name="subject" type="xs:string"/>
+<xs:element name="text" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CreateOrder">
+<xs:sequence>
+<xs:element minOccurs="0" name="order" type="tns:BusinessOrder"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CreateOrderResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BusinessOrderStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getQueueStatus">
+<xs:sequence>
+<xs:element minOccurs="0" name="userName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getQueueStatusResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:QueueStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QueueStatus">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="orderNumbers" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableProducts">
+<xs:sequence>
+<xs:element minOccurs="0" name="generationProfile" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableProductsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:GenerationProfileProduct"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenerationProfileProduct">
+<xs:sequence>
+<xs:element name="cadoozProductNumber" type="xs:string"/>
+<xs:element name="externalProductNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="value" nillable="true" type="xs:string"/>
+<xs:element name="customValue" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getOrderStatus">
+<xs:sequence>
+<xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getOrderStatusResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BusinessOrderStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getVouchersForOrder">
+<xs:sequence>
+<xs:element minOccurs="0" name="generationProfileName" type="xs:string"/>
+<xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getVouchersForOrderResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:VoucherInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="VoucherInformation">
+<xs:sequence>
+<xs:element name="responseState" type="tns:VoucherInformationState"/>
+<xs:element maxOccurs="unbounded" name="voucherList" type="tns:Voucher"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Voucher">
+<xs:sequence>
+<xs:element name="serialNumber" type="xs:long"/>
+<xs:element name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="address" nillable="true" type="tns:BusinessOrderAddress"/>
+<xs:element minOccurs="0" name="pin" nillable="true" type="xs:string"/>
+<xs:element name="value" type="xs:decimal"/>
+<xs:element name="currency" type="xs:string"/>
+<xs:element minOccurs="0" name="productName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="productNumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="productVariationNumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="ecardLink" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="eVoucherLink" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getOrderStatusByCustomerReferenceNumber">
+<xs:sequence>
+<xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getOrderStatusByCustomerReferenceNumberResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BusinessOrderStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCampaigns">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getCampaignsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:Campaign"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Campaign">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element name="catalogId" nillable="true" type="xs:long"/>
+<xs:element maxOccurs="unbounded" name="items" type="tns:CampaignItem"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CampaignItem">
+<xs:sequence>
+<xs:element name="number" type="xs:string"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element name="value" type="xs:string"/>
+<xs:element name="shippingCost" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="resendOrder">
+<xs:sequence>
+<xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="resendOrderResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BusinessOrderStatus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="BusinessOrderCurrency">
+<xs:restriction base="xs:string">
+<xs:enumeration value="EUR"/>
+<xs:enumeration value="GBP"/>
+<xs:enumeration value="PLN"/>
+<xs:enumeration value="USD"/>
+<xs:enumeration value="CAD"/>
+<xs:enumeration value="AUD"/>
+<xs:enumeration value="JPY"/>
+<xs:enumeration value="TRY"/>
+<xs:enumeration value="CHF"/>
+<xs:enumeration value="DKK"/>
+<xs:enumeration value="SEK"/>
+<xs:enumeration value="NOK"/>
+<xs:enumeration value="RUB"/>
+<xs:enumeration value="INR"/>
+<xs:enumeration value="CZK"/>
+<xs:enumeration value="CNY"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ProductVariationAvailability">
+<xs:restriction base="xs:string">
+<xs:enumeration value="AVAILABLE"/>
+<xs:enumeration value="LIMITED"/>
+<xs:enumeration value="NOT_AVAILABLE"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="CatalogProductAttribute">
+<xs:restriction base="xs:string">
+<xs:enumeration value="SHOP_NAME"/>
+<xs:enumeration value="BASKET_DESCRIPTION"/>
+<xs:enumeration value="LONG_DESCRIPTION"/>
+<xs:enumeration value="ECARD_DESCRIPTION"/>
+<xs:enumeration value="REDEMPTION_DESCRIPTION"/>
+<xs:enumeration value="USAGE_DESCRIPTION"/>
+<xs:enumeration value="IMAGE_URL_WIDTH_75PX"/>
+<xs:enumeration value="IMAGE_URL_WIDTH_200PX"/>
+<xs:enumeration value="IMAGE_URL_124x124PX"/>
+<xs:enumeration value="IMAGE_URL_640x400PX"/>
+<xs:enumeration value="IMAGE_URL_PICTURE1"/>
+<xs:enumeration value="IMAGE_URL_PICTURE2"/>
+<xs:enumeration value="IMAGE_URL_HEADER_LOGO"/>
+<xs:enumeration value="IMAGE_URL_FOOTER_LOGO"/>
+<xs:enumeration value="IMAGE_URL_PHOTO"/>
+<xs:enumeration value="IMAGE_URL_MANUFACTURER_LOGO"/>
+<xs:enumeration value="PRODUCT_INFO_URL"/>
+<xs:enumeration value="REDEEM_COUNTRIES"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="CatalogProductType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="TARGET_VOUCHER"/>
+<xs:enumeration value="UNIVERSAL_VOUCHER"/>
+<xs:enumeration value="PHYSICAL_PRODUCT"/>
+<xs:enumeration value="OTHER"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="BusinessOrderState">
+<xs:restriction base="xs:string">
+<xs:enumeration value="QUEUED"/>
+<xs:enumeration value="CREATED"/>
+<xs:enumeration value="WAITING"/>
+<xs:enumeration value="IN_SHIPMENT"/>
+<xs:enumeration value="DELIVERED"/>
+<xs:enumeration value="BOOKED"/>
+<xs:enumeration value="CANCELED"/>
+<xs:enumeration value="RETURNED"/>
+<xs:enumeration value="INTERNAL_ERROR"/>
+<xs:enumeration value="ACCESS_DENIED"/>
+<xs:enumeration value="PRODUCT_NOT_AVAILABLE"/>
+<xs:enumeration value="UNKNOWN"/>
+<xs:enumeration value="VERIFICATION_FAILED"/>
+<xs:enumeration value="DONE"/>
+<xs:enumeration value="ALREADY_PROCESSED"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="BusinessOrderDeliveryState">
+<xs:restriction base="xs:string">
+<xs:enumeration value="WAITING"/>
+<xs:enumeration value="IN_DELIVERY"/>
+<xs:enumeration value="DELIVERED"/>
+<xs:enumeration value="UNKNOWN"/>
+<xs:enumeration value="RETURNED"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ShippingProvider">
+<xs:restriction base="xs:string">
+<xs:enumeration value="UNKNOWN"/>
+<xs:enumeration value="CADOOZ"/>
+<xs:enumeration value="DHL"/>
+<xs:enumeration value="DP"/>
+<xs:enumeration value="HERMES"/>
+<xs:enumeration value="UPS"/>
+<xs:enumeration value="GLS"/>
+<xs:enumeration value="PROSECUR"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="BusinessOrderLanguage">
+<xs:restriction base="xs:string">
+<xs:enumeration value="DE"/>
+<xs:enumeration value="EN"/>
+<xs:enumeration value="IT"/>
+<xs:enumeration value="ES"/>
+<xs:enumeration value="FR"/>
+<xs:enumeration value="PL"/>
+<xs:enumeration value="UNKNOWN"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="BusinessOrderSalutation">
+<xs:restriction base="xs:string">
+<xs:enumeration value="MR"/>
+<xs:enumeration value="MRS"/>
+<xs:enumeration value="COMPANY"/>
+<xs:enumeration value="FAMILY"/>
+<xs:enumeration value="UNKNOWN"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="BusinessOrderPaymentType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="BILL"/>
+<xs:enumeration value="CREDITCARD"/>
+<xs:enumeration value="SOFORT"/>
+<xs:enumeration value="VORAB"/>
+<xs:enumeration value="PAYPAL"/>
+<xs:enumeration value="PREPAID"/>
+<xs:enumeration value="OTHER"/>
+<xs:enumeration value="OIP"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="VoucherInformationState">
+<xs:restriction base="xs:string">
+<xs:enumeration value="SUCCESS"/>
+<xs:enumeration value="INCORRECT_USAGE"/>
+<xs:enumeration value="UNKNOWN_GENERAION_PROFILE"/>
+<xs:enumeration value="ORDER_NOT_FOUND"/>
+<xs:enumeration value="INTERNAL_ERROR"/>
+<xs:enumeration value="WAITING"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getCampaignsResponse">
+<wsdl:part element="tns:getCampaignsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getVouchersForOrder">
+<wsdl:part element="tns:getVouchersForOrder" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getOrderStatusResponse">
+<wsdl:part element="tns:getOrderStatusResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getOrder">
+<wsdl:part element="tns:getOrder" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProductResponse">
+<wsdl:part element="tns:getProductResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAvailableCatalogs">
+<wsdl:part element="tns:getAvailableCatalogs" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getOrderStatusByCustomerReferenceNumber">
+<wsdl:part element="tns:getOrderStatusByCustomerReferenceNumber" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getChangedOrdersResponse">
+<wsdl:part element="tns:getChangedOrdersResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="processQueueEntryResponse">
+<wsdl:part element="tns:processQueueEntryResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getChangedOrders">
+<wsdl:part element="tns:getChangedOrders" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAvailableCategories">
+<wsdl:part element="tns:getAvailableCategories" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="resendOrderResponse">
+<wsdl:part element="tns:resendOrderResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getOrderResponse">
+<wsdl:part element="tns:getOrderResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProduct">
+<wsdl:part element="tns:getProduct" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getOrderStatus">
+<wsdl:part element="tns:getOrderStatus" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAvailableCategoriesResponse">
+<wsdl:part element="tns:getAvailableCategoriesResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCampaigns">
+<wsdl:part element="tns:getCampaigns" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getVouchersForOrderResponse">
+<wsdl:part element="tns:getVouchersForOrderResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="CreateOrder">
+<wsdl:part element="tns:CreateOrder" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getQueueStatus">
+<wsdl:part element="tns:getQueueStatus" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAvailableProductsResponse">
+<wsdl:part element="tns:getAvailableProductsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="processQueueEntry">
+<wsdl:part element="tns:processQueueEntry" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="resendOrder">
+<wsdl:part element="tns:resendOrder" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="CreateOrderResponse">
+<wsdl:part element="tns:CreateOrderResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAvailableCatalogsResponse">
+<wsdl:part element="tns:getAvailableCatalogsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAvailableProducts">
+<wsdl:part element="tns:getAvailableProducts" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getOrderStatusByCustomerReferenceNumberResponse">
+<wsdl:part element="tns:getOrderStatusByCustomerReferenceNumberResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getQueueStatusResponse">
+<wsdl:part element="tns:getQueueStatusResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="BusinessOrderService">
+<wsdl:operation name="getProduct">
+<wsdl:input message="tns:getProduct" name="getProduct"></wsdl:input>
+<wsdl:output message="tns:getProductResponse" name="getProductResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="processQueueEntry">
+<wsdl:input message="tns:processQueueEntry" name="processQueueEntry"></wsdl:input>
+<wsdl:output message="tns:processQueueEntryResponse" name="processQueueEntryResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAvailableCatalogs">
+<wsdl:input message="tns:getAvailableCatalogs" name="getAvailableCatalogs"></wsdl:input>
+<wsdl:output message="tns:getAvailableCatalogsResponse" name="getAvailableCatalogsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getChangedOrders">
+<wsdl:input message="tns:getChangedOrders" name="getChangedOrders"></wsdl:input>
+<wsdl:output message="tns:getChangedOrdersResponse" name="getChangedOrdersResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAvailableCategories">
+<wsdl:input message="tns:getAvailableCategories" name="getAvailableCategories"></wsdl:input>
+<wsdl:output message="tns:getAvailableCategoriesResponse" name="getAvailableCategoriesResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getOrder">
+<wsdl:input message="tns:getOrder" name="getOrder"></wsdl:input>
+<wsdl:output message="tns:getOrderResponse" name="getOrderResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="CreateOrder">
+<wsdl:input message="tns:CreateOrder" name="CreateOrder"></wsdl:input>
+<wsdl:output message="tns:CreateOrderResponse" name="CreateOrderResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getQueueStatus">
+<wsdl:input message="tns:getQueueStatus" name="getQueueStatus"></wsdl:input>
+<wsdl:output message="tns:getQueueStatusResponse" name="getQueueStatusResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAvailableProducts">
+<wsdl:input message="tns:getAvailableProducts" name="getAvailableProducts"></wsdl:input>
+<wsdl:output message="tns:getAvailableProductsResponse" name="getAvailableProductsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getOrderStatus">
+<wsdl:input message="tns:getOrderStatus" name="getOrderStatus"></wsdl:input>
+<wsdl:output message="tns:getOrderStatusResponse" name="getOrderStatusResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getVouchersForOrder">
+<wsdl:input message="tns:getVouchersForOrder" name="getVouchersForOrder"></wsdl:input>
+<wsdl:output message="tns:getVouchersForOrderResponse" name="getVouchersForOrderResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getOrderStatusByCustomerReferenceNumber">
+<wsdl:input message="tns:getOrderStatusByCustomerReferenceNumber" name="getOrderStatusByCustomerReferenceNumber"></wsdl:input>
+<wsdl:output message="tns:getOrderStatusByCustomerReferenceNumberResponse" name="getOrderStatusByCustomerReferenceNumberResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCampaigns">
+<wsdl:input message="tns:getCampaigns" name="getCampaigns"></wsdl:input>
+<wsdl:output message="tns:getCampaignsResponse" name="getCampaignsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="resendOrder">
+<wsdl:input message="tns:resendOrder" name="resendOrder"></wsdl:input>
+<wsdl:output message="tns:resendOrderResponse" name="resendOrderResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="BusinessOrderServiceSoapBinding" type="tns:BusinessOrderService">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="getProduct">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getProduct">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getProductResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAvailableCatalogs">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getAvailableCatalogs">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getAvailableCatalogsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="processQueueEntry">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="processQueueEntry">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="processQueueEntryResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAvailableCategories">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getAvailableCategories">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getAvailableCategoriesResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getChangedOrders">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getChangedOrders">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getChangedOrdersResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getOrder">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getOrder">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getOrderResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="CreateOrder">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="CreateOrder">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="CreateOrderResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAvailableProducts">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getAvailableProducts">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getAvailableProductsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getQueueStatus">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getQueueStatus">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getQueueStatusResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getOrderStatus">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getOrderStatus">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getOrderStatusResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getVouchersForOrder">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getVouchersForOrder">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getVouchersForOrderResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getOrderStatusByCustomerReferenceNumber">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getOrderStatusByCustomerReferenceNumber">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getOrderStatusByCustomerReferenceNumberResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCampaigns">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCampaigns">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCampaignsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="resendOrder">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="resendOrder">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="resendOrderResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="BusinessOrderService">
+<wsdl:port binding="tns:BusinessOrderServiceSoapBinding" name="BusinessOrderServicePort">
+<soap:address location="https://webservices.cadooz.com/services/businessorder/1.5.2/BusinessOrderService/BusinessOrder"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
