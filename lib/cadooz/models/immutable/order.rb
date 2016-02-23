@@ -18,11 +18,11 @@ class Cadooz::Immutable::Order
     @generation_profile = open_struct&.generation_profile
     @greeting_card = Cadooz::Immutable::GreetingCard.new(open_struct&.greeting_card)
     @invoice_address = Cadooz::Immutable::Address.new(open_struct&.invoice_address)
-    @invoice_information = open_struct&.invoice_information&.each_with_object([]) { |i, arr| arr << Cadooz::Immutable::InvoiceInformation(i) }
+    @invoice_information = Array(open_struct&.invoice_information)&.each_with_object([]) { |i, arr| arr << Cadooz::Immutable::InvoiceInformation.new(i) }
     @language = open_struct&.language
     @order_attributes = open_struct&.order_attributes&.inject({}) { |hash, element| hash.merge(element.key.to_sym => element.value) }
     @order_description = open_struct&.order_description
-    @order_positions = open_struct&.order_positions&.each_with_object([]) { |o, arr| arr << Cadooz::Immutable::OrderPosition(o) }
+    @order_positions = Array(open_struct&.order_positions)&.each_with_object([]) { |o, arr| arr << Cadooz::Immutable::OrderPosition.new(o) }
     @payment_informations = open_struct&.payment_informations
     @queue = open_struct&.queue
     @send_mail = open_struct&.send_mail

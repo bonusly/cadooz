@@ -128,12 +128,24 @@ describe Cadooz::BusinessOrderService do
       end
 
       context "invalid" do
-
+        it "should raise an exception" do
+          # Revisit with VCR recording of failed request
+        end
       end
     end
 
     describe "get order" do
+      context "succeeds" do
+        let(:raw_response) { get_raw_response(:get_order, true) }
+        let (:response) { get_serialized_response_object(:get_order, true) }
 
+        it "should get the order" do
+        end
+      end
+
+      context "fails" do
+
+      end
     end
 
     describe "get available catalogs" do
