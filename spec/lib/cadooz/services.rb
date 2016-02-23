@@ -140,11 +140,23 @@ describe Cadooz::BusinessOrderService do
         let (:response) { get_serialized_response_object(:get_order, true) }
 
         it "should get the order" do
+          message = { order_number: '160223-066085' }
+
+          savon.expects(:get_order).with(message: message).returns(raw_response)
+          expect(service.get_order('160223-066085').serialize).to eq(response)
         end
       end
 
       context "fails" do
+        let(:raw_response) { get_raw_response(:get_order, false) }
+        let (:response) { get_serialized_response_object(:get_order, false) }
 
+        it "should return an empty response" do
+          message = { order_number: '9' }
+
+          savon.expects(:get_order).with(message: message).returns(raw_response)
+          expect(service.get_order('9').serialize).to eq(response)
+        end
       end
     end
 
