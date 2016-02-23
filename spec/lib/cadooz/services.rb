@@ -161,11 +161,33 @@ describe Cadooz::BusinessOrderService do
     end
 
     describe "get available catalogs" do
+      context "succeeds" do
+        let(:raw_response) { get_raw_response(:get_available_catalogs, true) }
+        let(:response) { get_serialized_response_object(:get_available_catalogs, true) }
 
+        it "should get the available catalogs" do
+          message = { include_extra_content: false }
+
+          savon.expects(:get_available_catalogs).with(message: message).returns(raw_response)
+          expect(service.get_available_catalogs.serialize).to eq(response)
+        end
+      end
+
+      context "invalid" do
+        it "should raise an exception" do
+          # Revisit with VCR recording of failed request
+        end
+      end
     end
 
     describe "get product informations" do
+      context "succeeds" do
 
+      end
+
+      context "fails" do
+
+      end
     end
 
     describe "get available categories" do

@@ -7,7 +7,7 @@ class Cadooz::Immutable::Catalog
     @id = open_struct&.id
     @name = open_struct&.name
     @description = open_struct&.description
-    @products = open_struct&.products&.each_with_object([]) { |p, arr| arr << Cadooz::Immutable::CatalogProduct(p) }
+    @products = Array(open_struct&.products)&.each_with_object([]) { |p, arr| arr << Cadooz::Immutable::CatalogProduct.new(p) }
 
     self.freeze
   end
