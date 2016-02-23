@@ -132,7 +132,11 @@ class Cadooz::BusinessOrderService
     key = (operation.to_s + '_response').to_sym
     body = response.body[key][:return]
 
-    object = JSON.parse(body.to_json, object_class: OpenStruct)
+    if body.blank?
+      object = nil
+    else
+      object = JSON.parse(body.to_json, object_class: OpenStruct)
+    end
 
     if object.class == Array
       object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) }
