@@ -1,6 +1,5 @@
 class Cadooz::BusinessOrderService
   DEFAULT_TIMEOUT = 10
-  DEFAULT_GENERATION_PROFILE = 'XML Schnittstelle (Test)'
 
   def initialize(open_timeout = DEFAULT_TIMEOUT, read_timeout = DEFAULT_TIMEOUT)
     @client = Savon.client(
@@ -108,7 +107,7 @@ class Cadooz::BusinessOrderService
   # orderNumber - The number of the order.
   # Returns:
   # A VoucherInformation object. Never null.
-  def get_vouchers_for_order(generation_profile_name = DEFAULT_GENERATION_PROFILE, order_number)
+  def get_vouchers_for_order(generation_profile_name = Cadooz.configuration.generation_profile, order_number)
     response_class = Cadooz::Immutable::Voucher
 
     deserialize(@call.(__callee__, {generation_profile_name: generation_profile_name, order_number: order_number }), response_class, __callee__)
