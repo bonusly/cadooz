@@ -91,7 +91,7 @@ class Cadooz::BusinessOrderService
   # generationProfile - a name of a generation profile defined by cadooz
   # Returns:
   # A list of generation profile products that can be used for an order inside createOrder(Order)
-  def get_available_products(generation_profile = DEFAULT_GENERATION_PROFILE)
+  def get_available_products(generation_profile = Cadooz.configuration.generation_profile)
     response_class = Cadooz::Immutable::GenerationProfileProduct
 
     deserialize(@call.(__callee__, {generation_profile: generation_profile }), response_class, __callee__)
