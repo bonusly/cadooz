@@ -18,12 +18,12 @@ class Cadooz::Mutable::Order
     @generation_profile = nil
     @greeting_card = Cadooz::Mutable::GreetingCard.new
     @invoice_address = Cadooz::Mutable::Address.new
-    @invoice_information = [] # Cadooz::InvoiceInformation
+    @invoice_information = [] # Cadooz::Mutable::InvoiceInformation
     @language = nil
     @order_attributes = nil
     @order_description = nil
-    @order_positions = [] # Cadooz::OrderPosition
-    @payment_informations = nil
+    @order_positions = [] # Cadooz::Mutable::OrderPosition
+    @payment_informations = [] # Cadooz::Mutable::Payment
     @queue = nil
     @send_mail = nil
     @test = nil
