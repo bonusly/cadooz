@@ -116,6 +116,8 @@ class Cadooz::BusinessOrderService
   private
 
   def deserialize(response, response_class, operation)
+    response_wrapper = Cadooz::Immutable::Response
+
     key = (operation.to_s + '_response').to_sym
     body = response.body[key][:return]
 
@@ -126,9 +128,15 @@ class Cadooz::BusinessOrderService
     end
 
     if object.class == Array
-      object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) }
+      response_wrapper.new(
+          object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) },
+          response.xml
+      )
     elsif object.class == OpenStruct
-      Object::const_get(response_class.to_s).new(object)
+      response_wrapper.new(
+        Object::const_get(response_class.to_s).new(object),
+        response.xml
+      )
     else
       # TODO handle exception
     end
