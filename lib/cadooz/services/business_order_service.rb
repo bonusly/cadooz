@@ -127,18 +127,39 @@ class Cadooz::BusinessOrderService
       object = JSON.parse(body.to_json, object_class: OpenStruct)
     end
 
+    response_object = nil
+
     if object.class == Array
-      response_wrapper.new(
+      wrapper = response_wrapper.new(
           object.each_with_object([]) { |o, arr| arr << Object::const_get(response_class.to_s).new(o) },
           response.xml
       )
+      response_object = wrapper unless nil_check(wrapper.object.first)
     elsif object.class == OpenStruct
-      response_wrapper.new(
+      wrapper = response_wrapper.new(
         Object::const_get(response_class.to_s).new(object),
         response.xml
       )
+      response_object = wrapper unless nil_check(wrapper.object)
     else
       # TODO handle exception
     end
+
+    response_object
+  end
+
+  def nil_check(object)
+    object.instance_variables.each do |v|
+      value = object.instance_variable_get(v)
+      if value.class.to_s.include?('Cadooz::Immutable')
+        nil_check(value)
+      elsif value.class == Money
+        return false unless value.cents == 0
+      else
+        return false unless value.nil?
+      end
+    end
+
+    true
   end
 end
