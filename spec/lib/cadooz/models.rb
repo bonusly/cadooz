@@ -15,7 +15,7 @@ describe Cadooz do
 
   describe "immutable class attributes" do
     Dir.foreach('./lib/cadooz/models/immutable') do |model|
-      next if ['.', '..'].include?(model)
+      next if ['.', '..'].include?(model) || model.include?('response.rb')
 
       name = 'Cadooz::Immutable::' + model.chomp('.rb').split('_').collect(&:capitalize).join
       immutable_class = Object::const_get(name).new(OpenStruct.new)
