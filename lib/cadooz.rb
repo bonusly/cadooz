@@ -5,22 +5,25 @@ require 'savon'
 
 module Cadooz
   class Configuration
-    attr_accessor :username, :password, :wsdl, :generation_profile
+    attr_accessor :username, :password, :wsdl, :generation_profile, :program_id, :payment_username, :payment_password
 
     WSDL = 'https://webservices.cadooz.com/services/businessorder/1.5.2/BusinessOrderService/BusinessOrder?wsdl'
     TEST_USERNAME = 'cadooz'
     TEST_PASSWORD = 'Cadooz2015'
 
-    def initialize(username, password, generation_profile)
+    def initialize(username, password, generation_profile, program_id, payment_username, payment_password)
       self.username = username || TEST_USERNAME
       self.password = password || TEST_PASSWORD
       self.wsdl = WSDL
       self.generation_profile = generation_profile
+      self.program_id = program_id
+      self.payment_username = payment_username
+      self.payment_password = payment_password
     end
   end
 
   def self.configuration
-    @configuration ||= Configuration.new(nil, nil, nil)
+    @configuration ||= Configuration.new(nil, nil, nil, nil, nil, nil)
   end
 
   def self.configure
