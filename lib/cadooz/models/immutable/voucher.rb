@@ -16,7 +16,7 @@ class Cadooz::Immutable::Voucher
     @product_number = open_struct&.product_number
     @product_variation_number = open_struct&.product_variation_number
     @serial_number = open_struct&.serial_number
-    @value = Money.new((open_struct&.value.to_f * 100) || 0, @currency || 'USD')
+    @value = open_struct&.value.to_f
 
     self.freeze
   end

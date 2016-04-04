@@ -108,7 +108,7 @@ class Cadooz::BusinessOrderService
   # Returns:
   # A VoucherInformation object. Never null.
   def get_vouchers_for_order(generation_profile_name = Cadooz.configuration.generation_profile, order_number)
-    response_class = Cadooz::Immutable::Voucher
+    response_class = Cadooz::Immutable::VoucherInformation
 
     deserialize(@call.(__callee__, {generation_profile_name: generation_profile_name, order_number: order_number }), response_class, __callee__)
   end
