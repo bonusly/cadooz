@@ -38,6 +38,13 @@ module Mixins
 
     Cadooz.constants.include?(klass)
   end
+
+  def default_value_for_nil
+    self.instance_variables.each do |var|
+      value = self.instance_variable_get(var)
+      self.instance_variable_set(var, 'not available') if value.blank?
+    end
+  end
 end
 
 class String

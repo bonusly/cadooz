@@ -6,5 +6,7 @@ class Cadooz::Mutable::GreetingCard
   def initialize
     @subject = nil
     @text = nil
+
+    default_value_for_nil
   end
 end

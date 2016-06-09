@@ -18,5 +18,7 @@ class Cadooz::Mutable::Address
     @street = nil
     @street_addon = nil
     @zipcode = nil
+
+    default_value_for_nil
   end
 end

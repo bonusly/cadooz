@@ -10,5 +10,7 @@ class Cadooz::Mutable::Payment
     @type = nil
     @value = nil
     @verified = nil
+
+    default_value_for_nil
   end
 end

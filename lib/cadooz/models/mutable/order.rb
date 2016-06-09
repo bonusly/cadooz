@@ -28,5 +28,7 @@ class Cadooz::Mutable::Order
     @send_mail = nil
     @test = nil
     @website = nil
+
+    default_value_for_nil
   end
 end

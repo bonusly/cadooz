@@ -6,5 +6,7 @@ class Cadooz::Mutable::InvoiceInformation
   def initialize
     @debitor_number = nil
     @value = nil
+
+    default_value_for_nil
   end
 end
