@@ -5,19 +5,19 @@ class Cadooz::Mutable::Address
                 :lastname, :phone, :salutation, :state, :street,
                 :street_addon, :zipcode
 
-  def initialize
-    @company = nil
-    @country = nil
-    @department = nil
-    @email = nil
-    @firstname = nil
-    @lastname = nil
-    @phone = nil
-    @salutation = nil
-    @state = nil
-    @street = nil
-    @street_addon = nil
-    @zipcode = nil
+  def initialize(args={})
+    @company = args[:company]
+    @country = args[:country]
+    @department = args[:department]
+    @email = args[:email]
+    @firstname = args[:firstname]
+    @lastname = args[:lastname]
+    @phone = args[:phone]
+    @salutation = args[:salutation]
+    @state = args[:state]
+    @street = args[:street]
+    @street_addon = street_addon
+    @zipcode = args[:zipcode]
 
     default_value_for_nil
   end

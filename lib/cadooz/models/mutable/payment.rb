@@ -3,13 +3,13 @@ class Cadooz::Mutable::Payment
 
   attr_accessor :attributes, :description, :paid, :type, :value, :verified
 
-  def initialize
-    @attributes = nil
-    @description = nil
-    @paid = nil
-    @type = nil
-    @value = nil
-    @verified = nil
+  def initialize(args={})
+    @attributes = args[:attributes]
+    @description = args[:description]
+    @paid = args[:paid]
+    @type = args[:type]
+    @value = args[:value]
+    @verified = args[:verified]
 
     default_value_for_nil
   end
