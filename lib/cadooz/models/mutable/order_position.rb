@@ -18,7 +18,5 @@ class Cadooz::Mutable::OrderPosition
     @voucher_address = args[:voucher_address]
     @voucher_address_editable = args[:voucher_address_editable]
     @voucher_address_preset = args[:voucher_address_preset]
-
-    default_value_for_nil
   end
 end

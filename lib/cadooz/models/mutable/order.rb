@@ -18,17 +18,15 @@ class Cadooz::Mutable::Order
     @generation_profile = args[:generation_profile]
     @greeting_card = args[:greeting_card] # Cadooz::Mutable::GreetingCard.new
     @invoice_address = args[:invoice_address] # Cadooz::Mutable::Address.new
-    @invoice_information = args[:invoice_information] # Cadooz::Mutable::InvoiceInformation
+    @invoice_information = Array(args[:invoice_information]) # Cadooz::Mutable::InvoiceInformation
     @language = args[:language]
     @order_attributes = args[:order_attributes]
     @order_description = args[:order_description]
-    @order_positions = args[:order_positions] # Cadooz::Mutable::OrderPosition
-    @payment_informations = args[:payment_informations] # Cadooz::Mutable::Payment
+    @order_positions = Array(args[:order_positions]) # Cadooz::Mutable::OrderPosition
+    @payment_informations = Array(args[:payment_informations]) # Cadooz::Mutable::Payment
     @queue = args[:queue]
     @send_mail = args[:send_mail]
     @test = args[:test]
     @website = args[:website]
-
-    default_value_for_nil
   end
 end

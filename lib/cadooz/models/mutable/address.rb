@@ -16,7 +16,7 @@ class Cadooz::Mutable::Address
     @salutation = args[:salutation]
     @state = args[:state]
     @street = args[:street]
-    @street_addon = street_addon
+    @street_addon = args[:street_addon]
     @zipcode = args[:zipcode]
 
     default_value_for_nil

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cadooz (2.2.2)
+    cadooz (2.2.3)
       savon (~> 2.11.0)
 
 GEM
