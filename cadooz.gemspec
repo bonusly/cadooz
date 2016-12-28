@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['LICENSE', 'Rakefile', 'README.md']
 
   s.add_dependency 'savon', '~> 2.11.0'
+  s.add_dependency 'money', '~> 6.7.1'
   s.add_development_dependency 'rspec', '~> 3.4.0'
   s.add_development_dependency 'webmock', '~> 1.24.0'
+  s.add_development_dependency 'rake', '~> 10.5.0'
 end
