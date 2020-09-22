@@ -11,6 +11,10 @@ describe Cadooz::BusinessOrderService do
     stub_request(:get, /wsdl/).to_return(:status => 200, :body => wsdl)
   end
 
+  class ::StubSocket
+    def close; end
+  end
+
   describe "instance methods" do
     let(:service) { Cadooz::BusinessOrderService.new }
 
@@ -24,9 +28,8 @@ describe Cadooz::BusinessOrderService do
         it "should create the order" do
           message = order.serialize
 
-          # Comparing serialize hash responses easiest way to test value equality
           savon.expects(:create_order).with(message: message).returns(raw_response)
-          expect(service.create_order(order).serialize).to eq(response)
+          expect(service.create_order(order).serialize[:response][:object]).to eq(response[:order_status])
         end
       end
 
@@ -38,7 +41,7 @@ describe Cadooz::BusinessOrderService do
           message = order.serialize
 
           savon.expects(:create_order).with(message: message).returns(raw_response)
-          expect(service.create_order(order).serialize).to eq(response)
+          expect(service.create_order(order).serialize[:response][:object]).to eq(response[:order_status])
         end
       end
 
@@ -61,7 +64,7 @@ describe Cadooz::BusinessOrderService do
           message = { order_number: 20000 }
 
           savon.expects(:get_order_status).with(message: message).returns(raw_response)
-          expect(service.get_order_status(20000).serialize).to eq(response)
+          expect(service.get_order_status(20000).serialize[:response][:object]).to eq(response[:order_status])
         end
       end
 
@@ -86,7 +89,8 @@ describe Cadooz::BusinessOrderService do
           message = { customer_reference_number: 20000 }
 
           savon.expects(:get_order_status_by_customer_reference_number).with(message: message).returns(raw_response)
-          expect(service.get_order_status_by_customer_reference_number(20000).serialize).to eq(response)
+          expect(service.get_order_status_by_customer_reference_number(20000).serialize[:response][:object]).to eq(response[:order_status])
+
         end
       end
 
@@ -110,7 +114,7 @@ describe Cadooz::BusinessOrderService do
           message = { last_check_time: Date.parse('20-02-2016') }
 
           savon.expects(:get_changed_orders).with(message: message).returns(raw_response)
-          expect(service.get_changed_orders(Date.parse('20-02-2016')).map(&:serialize)).to eq(response)
+          expect(service.get_changed_orders(Date.parse('20-02-2016')).serialize[:response][:object]).to eq(response.map { |r| r[:order_status] })
         end
       end
 
@@ -123,7 +127,7 @@ describe Cadooz::BusinessOrderService do
           message = { last_check_time: Date.parse('01-03-2016') }
 
           savon.expects(:get_changed_orders).with(message: message).returns(raw_response)
-          expect(service.get_changed_orders(Date.parse('01-03-2016')).serialize).to eq(response)
+          expect(service.get_changed_orders(Date.parse('01-03-2016'))).to eq(nil)
         end
       end
 
@@ -143,7 +147,7 @@ describe Cadooz::BusinessOrderService do
           message = { order_number: '160223-066085' }
 
           savon.expects(:get_order).with(message: message).returns(raw_response)
-          expect(service.get_order('160223-066085').serialize).to eq(response)
+          expect(service.get_order('160223-066085').serialize[:response][:object]).to eq(response[:order])
         end
       end
 
@@ -155,7 +159,7 @@ describe Cadooz::BusinessOrderService do
           message = { order_number: '9' }
 
           savon.expects(:get_order).with(message: message).returns(raw_response)
-          expect(service.get_order('9').serialize).to eq(response)
+          expect(service.get_order('9').serialize[:response][:object]).to eq({})
         end
       end
     end
@@ -169,7 +173,7 @@ describe Cadooz::BusinessOrderService do
           message = { include_extra_content: false }
 
           savon.expects(:get_available_catalogs).with(message: message).returns(raw_response)
-          expect(service.get_available_catalogs.serialize).to eq(response)
+          expect(service.get_available_catalogs.serialize[:response][:object]).to eq(response[:catalog])
         end
       end
 
@@ -187,7 +191,7 @@ describe Cadooz::BusinessOrderService do
 
         it "should get available categories" do
           savon.expects(:get_available_categories).returns(raw_response)
-          expect(service.get_available_categories.map(&:serialize)).to eq(response)
+          expect(service.get_available_categories.serialize[:response][:object]).to eq(response.map { |r| r[:product_category] })
         end
       end
 
@@ -204,10 +208,10 @@ describe Cadooz::BusinessOrderService do
         let(:response) { get_serialized_response_object(:get_available_products, true) }
 
         it "should get available products" do
-          message = { generation_profile: 'XML Schnittstelle (Test)' }
+          message = { generation_profile: nil }
 
           savon.expects(:get_available_products).with(message: message).returns(raw_response)
-          expect(service.get_available_products.map(&:serialize)).to eq(response)
+          expect(service.get_available_products.serialize[:response][:object]).to eq(response.map { |r| r[:generation_profile_product] })
         end
       end
 
@@ -224,10 +228,10 @@ describe Cadooz::BusinessOrderService do
         let(:response) { get_serialized_response_object(:get_vouchers_for_order, true) }
 
         it "should get vouchers for an order number" do
-          message = { generation_profile_name: 'XML Schnittstelle (Test)', order_number: '160223-066085' }
+          message = { generation_profile_name: nil, order_number: '160223-066085' }
 
           savon.expects(:get_vouchers_for_order).with(message: message).returns(raw_response)
-          expect(service.get_vouchers_for_order('160223-066085').serialize).to eq(response)
+          expect(service.get_vouchers_for_order('160223-066085').serialize[:response][:object]).to eq({ response_state: 'SUCCESS' })
         end
       end
 
