@@ -32,9 +32,9 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Publishing
 
-This is a public repo, so we don't need to publish the gem in order to pull the changes into an application. Add this line to your Gemfile to get this gem: `gem "filereaderjs", github: "bonusly/filereaderjs"`
+This is a public repo, so we don't need to publish the gem in order to pull the changes into an application. Add this line to your Gemfile to get this gem: `gem "cadooz", github: "bonusly/cadooz"`
 
-When you have changes that you want to pull into an app (i.e. something you would publish as a new version), you can just run `bundle update filereaderjs` in the repo.
+When you have changes that you want to pull into an app (i.e. something you would publish as a new version), you can just run `bundle update cadooz` in the repo.
 
 ## License
 
